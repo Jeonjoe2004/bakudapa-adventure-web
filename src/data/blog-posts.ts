@@ -54,11 +54,11 @@ Ikon Kota Tomohon dengan kawah ganda yang unik. Pendakian yang relatif singkat n
 ## 3. Gunung Soputan (1.784 mdpl)
 Gunung api aktif dengan pemandangan kawah yang dramatis. Memerlukan izin khusus untuk mendaki.
 
-## 4. Gunung Mahawu (1.311 mdpl)
-Cocok untuk pemula, dengan kawah hijau toska yang memukau.
+## 4. Gunung Empung (1.340 mdpl)
+Kawah belerang yang dramatis, kembaran Gunung Lokon.
 
-## 5. Gunung Dua Saudara (1.364 mdpl)
-Gunung kembar di Bitung dengan pemandangan Laut Bunaken.
+## 5. Gunung Tampusu (1.100 mdpl)
+Cocok untuk pemula, pemandian air panas alami di kaki gunung.
 
 Setiap gunung punya keunikan dan tantangannya sendiri. Yang terpenting adalah selalu menjaga keselamatan dan kelestarian alam.`,
     imageUrl: "/images/blog/5-gunung.svg",
@@ -77,7 +77,7 @@ Setiap gunung punya keunikan dan tantangannya sendiri. Yang terpenting adalah se
     content: `Mendaki gunung adalah aktivitas yang menantang namun sangat rewarding. Bagi kamu yang baru pertama kali ingin mendaki, berikut tips-tips penting yang perlu diketahui.
 
 ## 1. Pilih Gunung yang Tepat
-Untuk pendakian pertama, pilih gunung dengan tingkat kesulitan rendah hingga sedang seperti Gunung Mahawu atau Gunung Dua Saudara.
+Untuk pendakian pertama, pilih gunung dengan tingkat kesulitan rendah hingga sedang seperti Gunung Tampusu atau Gunung Empung.
 
 ## 2. Persiapkan Fisik
 Mulai latihan kardio minimal 2 minggu sebelum pendakian. Jogging, naik turun tangga, dan squat sangat membantu.

@@ -23,7 +23,7 @@ export const siteConfig: {
     instagram: "https://instagram.com/bakudapa.adventure",
     tiktok: "https://tiktok.com/@bakudapa.adventure",
     email: "halo@bakudapa.my.id",
-    whatsapp: "https://wa.me/6281234567890",
+    whatsapp: "https://wa.me/623138518923",
   },
 };
 

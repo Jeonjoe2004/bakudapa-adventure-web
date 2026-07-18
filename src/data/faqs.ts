@@ -40,7 +40,7 @@ export const faqs: FAQItem[] = [
     id: "6",
     question: "Gunung apa saja yang ada di Bakudapa Adventure?",
     answer:
-      "Kami akan menyediakan informasi lengkap tentang gunung-gunung di Sulawesi Utara, termasuk Gunung Lokon, Klabat, Soputan, Ambang, Dua Saudara, Mahawu, dan masih banyak lagi. Setiap gunung dilengkapi dengan informasi jalur, tingkat kesulitan, dan tips pendakian.",
+      "Kami akan menyediakan informasi lengkap tentang gunung-gunung di Sulawesi Utara, termasuk Gunung Lokon, Klabat, Soputan, Ambang, Empung, Tampusu, dan masih banyak lagi. Setiap gunung dilengkapi dengan informasi jalur, tingkat kesulitan, dan tips pendakian.",
     category: "destinasi",
   },
   {

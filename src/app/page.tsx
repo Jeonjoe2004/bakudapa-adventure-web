@@ -15,7 +15,7 @@ const fadeUp = {
 };
 
 const stats = [
-  { icon: Mountain, value: "6+", label: "Gunung" },
+  { icon: Mountain, value: "7+", label: "Gunung" },
   { icon: Users, value: "0", label: "Pendaki Terdaftar", soon: true },
   { icon: MapPin, value: "1", label: "Kota Base" },
 ];
