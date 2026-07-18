@@ -20,10 +20,10 @@ export const siteConfig: {
   url: siteUrl,
   ogImage: `${siteUrl}/images/og-image.svg`,
   links: {
-    instagram: "https://instagram.com/bakudapa.adventure",
-    tiktok: "https://tiktok.com/@bakudapa.adventure",
+    instagram: "https://instagram.com/bakudapadventure",
+    tiktok: "https://tiktok.com/@bakudapadventure",
     email: "halo@bakudapa.my.id",
-    whatsapp: "https://wa.me/623138518923",
+    whatsapp: "https://wa.me/6283138518923",
   },
 };
 
