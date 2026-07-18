@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#14532d;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a2412;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <path d="M0 400 L200 250 L400 320 L600 180 L800 300 L1000 220 L1200 350 L1200 630 L0 630 Z" fill="#166534" opacity="0.5"/>
+  <path d="M0 500 L300 380 L500 450 L700 350 L900 420 L1200 400 L1200 630 L0 630 Z" fill="#15803d" opacity="0.3"/>
+  <text x="600" y="260" font-family="system-ui" font-size="64" fill="#ffffff" text-anchor="middle" font-weight="bold">Bakudapa Adventure</text>
+  <text x="600" y="330" font-family="system-ui" font-size="28" fill="#86efac" text-anchor="middle">Komunitas Pendaki Sulawesi Utara</text>
+  <text x="600" y="420" font-family="system-ui" font-size="18" fill="#bbf7d0" text-anchor="middle" opacity="0.8">Temukan teman mendaki, jelajahi gunung, dan bagikan petualanganmu.</text>
+</svg>
