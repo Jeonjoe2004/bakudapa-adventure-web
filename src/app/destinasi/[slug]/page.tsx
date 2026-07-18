@@ -1,101 +1,132 @@
-"use client";
-
-import { use } from "react";
-import { motion } from "framer-motion";
-import { MapPin, Mountain as MountainIcon, Clock, TrendingUp, Calendar, ArrowLeft } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { mountains } from "@/data/mountains";
 import { notFound } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import { MapPin, Mountain as MountainIcon, Clock, TrendingUp, Calendar, ArrowLeft } from "lucide-react";
+import { mountains } from "@/data/mountains";
+import { siteConfig } from "@/lib/site-config";
+import type { Metadata } from "next";
 
-const difficultyColors: Record<string, string> = {
+export function generateStaticParams() {
+  return mountains.map((m) => ({ slug: m.slug }));
+}
+
+export function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  return params.then(({ slug }) => {
+    const mountain = mountains.find((m) => m.slug === slug);
+    if (!mountain) return { title: "Tidak Ditemukan" };
+    return {
+      title: mountain.name,
+      description: mountain.description,
+      openGraph: {
+        title: `${mountain.name} | Bakudapa Adventure`,
+        description: mountain.description,
+        images: [{ url: mountain.imageUrl, width: 1200, height: 630, alt: mountain.name }],
+      },
+    };
+  });
+}
+
+const difficultyColors = {
   mudah: "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300",
   sedang: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300",
   sulit: "bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300",
   ekstrem: "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300",
 };
 
-export default function DetailDestinasiPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = use(params);
+export default async function MountainDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const mountain = mountains.find((m) => m.slug === slug);
 
-  if (!mountain) {
-    notFound();
-  }
+  if (!mountain) notFound();
 
   return (
     <>
-      <section className="relative pt-20">
-        <div className="relative h-[50vh] min-h-[400px]">
-          <Image
-            src={mountain.imageUrl}
-            alt={mountain.name}
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-        </div>
-      </section>
-
-      <section className="-mt-32 relative z-10 pb-20">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
+      {/* Hero */}
+      <section className="relative h-[50vh] min-h-[400px]">
+        <Image
+          src={mountain.imageUrl}
+          alt={mountain.name}
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+        <div className="absolute inset-0 flex items-end">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-8 w-full">
             <Link
               href="/destinasi"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6"
+              className="inline-flex items-center gap-1.5 text-white/80 hover:text-white text-sm mb-4 transition-colors"
             >
               <ArrowLeft className="h-4 w-4" />
               Kembali ke Destinasi
             </Link>
-
-            <div className="bg-card rounded-2xl border border-border p-6 sm:p-8 shadow-sm">
-              <h1 className="text-3xl sm:text-4xl font-bold font-display mb-2">{mountain.name}</h1>
-              <div className="flex items-center gap-1 text-sm text-muted-foreground mb-6">
-                <MapPin className="h-4 w-4" />
-                {mountain.location}
-              </div>
-
-              <div className="flex flex-wrap gap-3 mb-6">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-sm">
-                  <MountainIcon className="h-4 w-4 text-forest-500" />
-                  {mountain.elevation} mdpl
-                </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-sm">
-                  <Clock className="h-4 w-4 text-forest-500" />
-                  {mountain.estimatedTime}
-                </span>
-                <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm ${difficultyColors[mountain.difficulty]}`}>
-                  <TrendingUp className="h-4 w-4" />
-                  {mountain.difficulty.charAt(0).toUpperCase() + mountain.difficulty.slice(1)}
-                </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-sm">
-                  <Calendar className="h-4 w-4 text-forest-500" />
-                  {mountain.bestSeason}
-                </span>
-              </div>
-
-              <div className="prose prose-sm max-w-none text-muted-foreground">
-                <p className="text-base leading-relaxed">{mountain.description}</p>
-              </div>
-
-              <div className="mt-8 pt-6 border-t border-border">
-                <h3 className="text-sm font-semibold mb-3">Tertarik mendaki gunung ini?</h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Daftar di waiting list dan dapatkan informasi lengkap tentang jalur pendakian, tips, dan teman mendaki.
-                </p>
-                <Link href="/waiting-list">
-                  <Button className="bg-forest-500 hover:bg-forest-600 text-white">
-                    Gabung Waiting List
-                  </Button>
-                </Link>
-              </div>
+            <h1 className="text-4xl sm:text-5xl font-bold font-display text-white mb-2">
+              {mountain.name}
+            </h1>
+            <div className="flex items-center gap-2 text-white/80">
+              <MapPin className="h-4 w-4" />
+              <span>{mountain.location}</span>
             </div>
-          </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Info Cards */}
+      <section className="py-8 border-b border-border bg-muted/50">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div className="bg-card rounded-xl border border-border p-4 text-center">
+              <MountainIcon className="h-6 w-6 text-forest-500 mx-auto mb-2" />
+              <p className="text-2xl font-bold">{mountain.elevation}</p>
+              <p className="text-xs text-muted-foreground">mdpl</p>
+            </div>
+            <div className="bg-card rounded-xl border border-border p-4 text-center">
+              <Clock className="h-6 w-6 text-forest-500 mx-auto mb-2" />
+              <p className="text-2xl font-bold">{mountain.estimatedTime}</p>
+              <p className="text-xs text-muted-foreground">Estimasi Pendakian</p>
+            </div>
+            <div className="bg-card rounded-xl border border-border p-4 text-center">
+              <TrendingUp className="h-6 w-6 text-forest-500 mx-auto mb-2" />
+              <p className="text-lg font-bold capitalize">{mountain.difficulty}</p>
+              <p className="text-xs text-muted-foreground">Tingkat Kesulitan</p>
+            </div>
+            <div className="bg-card rounded-xl border border-border p-4 text-center">
+              <Calendar className="h-6 w-6 text-forest-500 mx-auto mb-2" />
+              <p className="text-sm font-bold">{mountain.bestSeason}</p>
+              <p className="text-xs text-muted-foreground">Musim Terbaik</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Content */}
+      <section className="py-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-2xl font-bold font-display mb-4">Tentang {mountain.name}</h2>
+            <p className="text-muted-foreground leading-relaxed text-lg">
+              {mountain.description}
+            </p>
+
+            <div className="mt-8 p-6 rounded-xl bg-muted/50 border border-border">
+              <h3 className="font-semibold mb-3">📍 Koordinat</h3>
+              <p className="text-sm text-muted-foreground">
+                {mountain.latitude}, {mountain.longitude}
+              </p>
+            </div>
+
+            <div className="mt-8">
+              <Link
+                href={siteConfig.links.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-forest-500 text-white px-6 py-3 rounded-xl font-medium hover:bg-forest-600 transition-colors"
+              >
+                Tanyakan Pendakian via WhatsApp
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </>

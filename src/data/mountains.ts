@@ -98,7 +98,7 @@ export const mountains: Mountain[] = [
     popularity: 4,
   },
   {
-    id: "6",
+    id: "7",
     name: "Gunung Tampusu",
     slug: "tampusu",
     location: "Minahasa, Sulawesi Utara",
