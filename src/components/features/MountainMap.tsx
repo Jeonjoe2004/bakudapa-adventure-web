@@ -26,7 +26,11 @@ export function MountainMap({ latitude, longitude, name }: MountainMapProps) {
         shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
       });
 
-      const map = L.map(mapRef.current!).setView([latitude, longitude], 13);
+      const map = L.map(mapRef.current!, {
+        center: [latitude, longitude],
+        zoom: 13,
+        scrollWheelZoom: false,
+      });
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -34,6 +38,9 @@ export function MountainMap({ latitude, longitude, name }: MountainMapProps) {
       }).addTo(map);
 
       L.marker([latitude, longitude]).addTo(map).bindPopup(`<b>${name}</b>`).openPopup();
+
+      // Force recalculate size after render
+      setTimeout(() => map.invalidateSize(), 100);
 
       mapInstanceRef.current = map;
     }
@@ -52,13 +59,13 @@ export function MountainMap({ latitude, longitude, name }: MountainMapProps) {
     <>
       <link
         rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
-        integrity="sha512-Zcn6bjR/8RZbLEDCR/+3PWgM1E0VRlC0y5W8cY3Wd2W2G5d9vG2C0fG5K4yOeQ3GQ1vE5Q3K5Q3K5Q5Q5Q5Q=="
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         crossOrigin=""
       />
       <div
         ref={mapRef}
-        className="h-[300px] w-full rounded-xl border border-border z-0"
+        className="h-[300px] w-full rounded-xl border border-border overflow-hidden"
+        style={{ position: "relative" }}
       />
     </>
   );
