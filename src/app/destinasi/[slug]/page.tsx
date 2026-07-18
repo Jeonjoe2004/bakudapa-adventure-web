@@ -5,6 +5,7 @@ import { MapPin, Mountain as MountainIcon, Clock, TrendingUp, Calendar, ArrowLef
 import { mountains } from "@/data/mountains";
 import { siteConfig } from "@/lib/site-config";
 import type { Metadata } from "next";
+import { MountainMap } from "@/components/features/MountainMap";
 
 export function generateStaticParams() {
   return mountains.map((m) => ({ slug: m.slug }));
@@ -39,8 +40,26 @@ export default async function MountainDetailPage({ params }: { params: Promise<{
 
   if (!mountain) notFound();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TouristAttraction",
+    name: mountain.name,
+    description: mountain.description,
+    address: { "@type": "PostalAddress", addressLocality: mountain.location },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: mountain.latitude,
+      longitude: mountain.longitude,
+    },
+    maximumAttendeeCapacity: mountain.elevation,
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[400px]">
         <Image
@@ -109,11 +128,13 @@ export default async function MountainDetailPage({ params }: { params: Promise<{
               {mountain.description}
             </p>
 
-            <div className="mt-8 p-6 rounded-xl bg-muted/50 border border-border">
-              <h3 className="font-semibold mb-3">📍 Koordinat</h3>
-              <p className="text-sm text-muted-foreground">
-                {mountain.latitude}, {mountain.longitude}
-              </p>
+            <div className="mt-8">
+              <h3 className="font-semibold mb-3">📍 Peta Lokasi</h3>
+              <MountainMap
+                latitude={mountain.latitude}
+                longitude={mountain.longitude}
+                name={mountain.name}
+              />
             </div>
 
             <div className="mt-8">

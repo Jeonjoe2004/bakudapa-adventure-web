@@ -70,8 +70,23 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
 
   if (!post) notFound();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    author: { "@type": "Organization", name: post.author },
+    datePublished: post.publishedAt,
+    image: post.imageUrl,
+    keywords: post.tags.join(", "),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero */}
       <section className="relative h-[40vh] min-h-[300px]">
         <Image

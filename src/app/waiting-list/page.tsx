@@ -1,37 +1,17 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { supabase } from "@/lib/supabase";
+import { useActionState } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Loader2 } from "lucide-react";
+import { submitWaitingList, type WaitingListFormState } from "@/app/actions/waiting-list";
+
+const initialState: WaitingListFormState = { success: false, error: null };
 
 export default function WaitingListPage() {
-  const [form, setForm] = useState({ name: "", email: "", whatsapp: "", kota: "" });
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [state, formAction, isPending] = useActionState(submitWaitingList, initialState);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-
-    try {
-      const { error: insertError } = await supabase
-        .from("waiting_list")
-        .insert([form]);
-
-      if (insertError) throw insertError;
-      setSubmitted(true);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Gagal mendaftar. Silakan coba lagi.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (submitted) {
+  if (state.success) {
     return (
       <section className="pt-28 pb-20">
         <div className="mx-auto max-w-lg px-4 text-center">
@@ -74,18 +54,17 @@ export default function WaitingListPage() {
             transition={{ delay: 0.1 }}
             className="rounded-xl border border-border bg-card p-6 sm:p-8"
           >
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form action={formAction} className="space-y-4">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-1.5">
                   Nama Lengkap <span className="text-destructive">*</span>
                 </label>
                 <input
                   id="name"
+                  name="name"
                   type="text"
                   required
                   placeholder="Masukkan nama lengkap"
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
                   className="w-full px-3 py-2.5 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
                 />
               </div>
@@ -96,11 +75,10 @@ export default function WaitingListPage() {
                 </label>
                 <input
                   id="email"
+                  name="email"
                   type="email"
                   required
                   placeholder="contoh@email.com"
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
                   className="w-full px-3 py-2.5 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
                 />
               </div>
@@ -111,11 +89,10 @@ export default function WaitingListPage() {
                 </label>
                 <input
                   id="whatsapp"
+                  name="whatsapp"
                   type="tel"
                   required
                   placeholder="0812xxxxxx"
-                  value={form.whatsapp}
-                  onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
                   className="w-full px-3 py-2.5 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
                 />
               </div>
@@ -126,26 +103,25 @@ export default function WaitingListPage() {
                 </label>
                 <input
                   id="kota"
+                  name="kota"
                   type="text"
                   required
                   placeholder="Kota asal"
-                  value={form.kota}
-                  onChange={(e) => setForm({ ...form, kota: e.target.value })}
                   className="w-full px-3 py-2.5 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
                 />
               </div>
 
-              {error && (
-                <p className="text-sm text-destructive">{error}</p>
+              {state.error && (
+                <p className="text-sm text-destructive">{state.error}</p>
               )}
 
               <Button
                 type="submit"
-                disabled={loading}
+                disabled={isPending}
                 size="lg"
                 className="w-full bg-forest-500 hover:bg-forest-600 text-white"
               >
-                {loading ? (
+                {isPending ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />
                     Mendaftarkan...

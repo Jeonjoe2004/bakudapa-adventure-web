@@ -1,18 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone, Globe, Music, Send } from "lucide-react";
-import { useState } from "react";
+import { Mail, MapPin, Phone, Globe, Music, Send, Loader2 } from "lucide-react";
+import { useActionState } from "react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site-config";
+import { submitContact, type ContactFormState } from "@/app/actions/contact";
+
+const initialState: ContactFormState = { success: false, error: null };
 
 export default function KontakPage() {
-  const [sent, setSent] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSent(true);
-  };
+  const [state, formAction, isPending] = useActionState(submitContact, initialState);
 
   return (
     <>
@@ -72,7 +70,7 @@ export default function KontakPage() {
                     <div>
                       <p className="font-medium text-sm">Instagram</p>
                       <a href={siteConfig.links.instagram} target="_blank" rel="noopener noreferrer" className="text-sm text-forest-500 hover:underline">
-                        @bakudapa.adventure
+                        @bakudapadventure
                       </a>
                     </div>
                   </div>
@@ -82,7 +80,7 @@ export default function KontakPage() {
                     <div>
                       <p className="font-medium text-sm">TikTok</p>
                       <a href={siteConfig.links.tiktok} target="_blank" rel="noopener noreferrer" className="text-sm text-forest-500 hover:underline">
-                        @bakudapa.adventure
+                        @bakudapadventure
                       </a>
                     </div>
                   </div>
@@ -94,32 +92,45 @@ export default function KontakPage() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
             >
-              {sent ? (
+              {state.success ? (
                 <div className="rounded-xl border border-border bg-card p-6 sm:p-8 text-center flex flex-col items-center justify-center min-h-[300px]">
                   <Send className="h-12 w-12 text-forest-500 mb-4" />
                   <h3 className="font-semibold text-lg mb-2">Pesan Terkirim!</h3>
                   <p className="text-sm text-muted-foreground">Terima kasih, kami akan menghubungi kamu segera.</p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="rounded-xl border border-border bg-card p-6 sm:p-8 space-y-4">
+                <form action={formAction} className="rounded-xl border border-border bg-card p-6 sm:p-8 space-y-4">
                   <h2 className="text-lg font-semibold mb-2">Kirim Pesan</h2>
 
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-1">Nama</label>
-                    <input id="name" type="text" required placeholder="Nama lengkap" className="w-full px-3 py-2.5 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
+                    <input id="name" name="name" type="text" required placeholder="Nama lengkap" className="w-full px-3 py-2.5 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
-                    <input id="email" type="email" required placeholder="email@contoh.com" className="w-full px-3 py-2.5 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
+                    <input id="email" name="email" type="email" required placeholder="email@contoh.com" className="w-full px-3 py-2.5 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
                   </div>
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium mb-1">Pesan</label>
-                    <textarea id="message" required rows={4} placeholder="Tulis pesan..." className="w-full px-3 py-2.5 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring resize-none" />
+                    <textarea id="message" name="message" required rows={4} placeholder="Tulis pesan..." className="w-full px-3 py-2.5 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring resize-none" />
                   </div>
 
-                  <Button type="submit" className="w-full bg-forest-500 hover:bg-forest-600 text-white">
-                    <Send className="h-4 w-4" />
-                    Kirim Pesan
+                  {state.error && (
+                    <p className="text-sm text-destructive">{state.error}</p>
+                  )}
+
+                  <Button type="submit" disabled={isPending} className="w-full bg-forest-500 hover:bg-forest-600 text-white">
+                    {isPending ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Mengirim...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="h-4 w-4" />
+                        Kirim Pesan
+                      </>
+                    )}
                   </Button>
                 </form>
               )}
