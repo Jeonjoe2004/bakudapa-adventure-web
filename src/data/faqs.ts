@@ -5,7 +5,7 @@ export const faqs: FAQItem[] = [
     id: "1",
     question: "Apa itu Bakudapa Adventure?",
     answer:
-      "Bakudapa Adventure adalah platform komunitas digital untuk para pendaki gunung di Sulawesi Utara. Kami menyediakan wadah bagi pendaki dari berbagai level untuk terhubung, berbagi informasi, dan merencanakan petualangan bersama. 'Bakudapa' berasal dari bahasa daerah yang berarti 'bergunung' atau 'mendaki gunung'.",
+      "Bakudapa Adventure adalah platform komunitas digital untuk para pendaki gunung di Sulawesi Utara. Kami menyediakan wadah bagi pendaki dari berbagai level untuk terhubung, berbagi informasi, dan merencanakan petualangan bersama. 'Bakudapa' berasal dari bahasa Manado yang berarti 'bertemu' atau 'berkumpul'.",
     category: "umum",
   },
   {

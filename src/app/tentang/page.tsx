@@ -56,7 +56,7 @@ export default function TentangPage() {
           >
             <h2 className="text-2xl font-bold font-display mb-4">Cerita Kami</h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              &ldquo;Bakudapa&rdquo; berasal dari bahasa daerah Sulawesi Utara yang berarti &ldquo;bergunung&rdquo;
+              &ldquo;Bakudapa&rdquo; berasal dari bahasa Manado yang berarti &ldquo;bertemu&rdquo; atau &ldquo;berkumpul&rdquo;
               atau kegiatan mendaki gunung. Berawal dari sekelompok kecil pendaki di Tomohon, kami
               merasakan perlunya sebuah wadah digital yang bisa menghubungkan para pencinta alam
               di seluruh Sulawesi Utara.

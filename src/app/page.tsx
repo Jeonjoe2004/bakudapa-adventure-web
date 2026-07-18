@@ -172,7 +172,7 @@ export default function HomePage() {
               </h2>
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 Bakudapa Adventure adalah platform komunitas digital untuk para pendaki gunung di Sulawesi Utara.
-                &ldquo;Bakudapa&rdquo; berasal dari bahasa daerah yang berarti &ldquo;bergunung&rdquo; atau &ldquo;mendaki gunung&rdquo;.
+                &ldquo;Bakudapa&rdquo; berasal dari bahasa Manado yang berarti &ldquo;bertemu&rdquo; atau &ldquo;berkumpul&rdquo;.
               </p>
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 Kami percaya bahwa setiap orang berhak menikmati keindahan alam Sulawesi Utara dengan aman dan bersama teman yang tepat.
