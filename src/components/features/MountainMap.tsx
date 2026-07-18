@@ -6,11 +6,13 @@ interface MountainMapProps {
   latitude: number;
   longitude: number;
   name: string;
+  mapQuery?: string;
 }
 
-export function MountainMap({ latitude, longitude, name }: MountainMapProps) {
-  const embedUrl = `https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d200!2d${longitude}!3d${latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sid!2sid`;
-  const routeUrl = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
+export function MountainMap({ latitude, longitude, name, mapQuery }: MountainMapProps) {
+  const query = mapQuery || `${latitude},${longitude}`;
+  const embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(query)}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+  const routeUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(query)}`;
 
   return (
     <div className="space-y-3">

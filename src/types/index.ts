@@ -12,6 +12,7 @@ export interface Mountain {
   estimatedTime: string;
   bestSeason: string;
   popularity: number;
+  mapQuery?: string;
 }
 
 export interface BlogPost {

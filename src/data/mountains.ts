@@ -96,6 +96,7 @@ export const mountains: Mountain[] = [
     estimatedTime: "3-4 jam",
     bestSeason: "Maret - Oktober",
     popularity: 4,
+    mapQuery: "Parkiran Ujung Aspal Gunung Empung, Tinoor Satu, Tomohon Utara, Sulawesi Utara",
   },
   {
     id: "7",

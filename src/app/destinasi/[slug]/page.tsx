@@ -134,6 +134,7 @@ export default async function MountainDetailPage({ params }: { params: Promise<{
                 latitude={mountain.latitude}
                 longitude={mountain.longitude}
                 name={mountain.name}
+                mapQuery={mountain.mapQuery}
               />
             </div>
 
