@@ -10,7 +10,7 @@ export const mountains: Mountain[] = [
     difficulty: "sedang",
     description:
       "Gunung api aktif yang menjadi ikon Kota Tomohon. Dengan kawah ganda yang unik, Lokon menawarkan pemandangan kota Tomohon dan Danau Tondano dari puncaknya. Jalur pendakian relatif singkat dengan medan yang menantang.",
-    imageUrl: "/images/mountains/lokon.svg",
+    imageUrl: "/images/mountains/lokon.jpeg",
     latitude: 1.3581,
     longitude: 124.792,
     estimatedTime: "3-4 jam",
@@ -42,7 +42,7 @@ export const mountains: Mountain[] = [
     difficulty: "sulit",
     description:
       "Gunung api aktif yang menjadi salah satu gunung terindah di Sulawesi. Pemandangan kawah aktif dan lanskap yang dramatis menjadi daya tarik utama. Pendakian memerlukan izin khusus.",
-    imageUrl: "/images/mountains/soputan.svg",
+    imageUrl: "/images/mountains/soputan.jpg",
     latitude: 1.1086,
     longitude: 124.7306,
     estimatedTime: "8-10 jam",
@@ -90,7 +90,7 @@ export const mountains: Mountain[] = [
     difficulty: "sedang",
     description:
       "Gunung api kembar dengan Lokon, memiliki kawah yang masih aktif. Empung menawarkan pemandangan kawah belerang yang dramatis serta panorama Kota Tomohon dan Danau Tondano dari puncaknya.",
-    imageUrl: "/images/mountains/empung.svg",
+    imageUrl: "/images/mountains/empung.jpg",
     latitude: 1.3525,
     longitude: 124.7919,
     estimatedTime: "3-4 jam",
